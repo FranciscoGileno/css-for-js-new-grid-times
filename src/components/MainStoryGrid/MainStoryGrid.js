@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { COLORS, QUERIES } from "../../constants";
 
 import { MAIN_STORY, OPINION_STORIES, SECONDARY_STORIES } from "../../data";
 
 import Advertisement from "../Advertisement";
-import Divider from "../Divider";
 import MainStory from "../MainStory";
 import OpinionStory from "../OpinionStory";
 import SecondaryStory from "../SecondaryStory";
@@ -30,14 +30,14 @@ const MainStoryGrid = () => {
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
             <>
               {index > 0 && <Divider />}
               <OpinionStory {...story} />
             </>
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -69,6 +69,24 @@ const SecondaryStorySection = styled.section`
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Divider = styled.div`
+  border-bottom: 1px solid ${COLORS.gray[300]};
+  padding-top: 16px;
+  margin-bottom: 16px;
+`;
+
+const OpinionStoryList = styled(StoryList)`
+  @media ${QUERIES.tabletOnly} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+
+    & ${Divider} {
+      display: none;
+    }
+  }
 `;
 
 const OpinionSection = styled.section`
